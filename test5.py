@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 #A pracitice program based on some file reading examples in Dive into Python.
 
+=======
+>>>>>>> 5385387205ba58a03e5b09d1b27cd8b3568452e2
 import os
 import sys
 from UserDict import UserDict
