@@ -1,49 +1,18 @@
 class NumOperations:
 	
 	def __init__(self, num1, num2):
-		primef1 = self.factorize([num1])
-		primef2 = self.factorize([num2])
-		print self.getLCM(primef1, primef2)
-	
-	def factorize(self, num):
-		for x in num:
-			if self.isPrime(x):
-				num.remove(x)
-				num.extend(self.factorize(self.isPrime(x)))
-		return num
-	
-	def isPrime(self, num):
-		x = 2
+		g = self.GCD(num1, num2)
+		l = self.LCM(num1, num2, g)
+		print "".join("%s\n%s" % (g, l))
 		
-		while num % x != 0:
-			x += 1
-		if x == num:
-			return []
+	def GCD(self, a, b):
+		if (a % b) == 0:
+			return b
 		else:
-			return [x, num/x]
+			return self.GCD(b, a % b)
 
-	def getLCM(self, primef1, primef2):
-		lcmpf = []
-		lcm = 1
-		checked = []
-		
-		for x in primef1:
-			if x not in checked:
-				if primef1.count(x) > primef2.count(x):
-					lcmpf.extend([x] * primef1.count(x))
-				else:
-					lcmpf.extend([x] * primef2.count(x))
-				checked.append(x)
-				
-		for x in primef2:
-			if x not in checked:
-				lcmpf.extend([x] * primef2.count(x))
-				checked.append(x)
-		
-		for x in lcmpf:
-			lcm *= x
-		return lcm
-		
+	def LCM(self, a, b, gcd):
+		return (a/gcd) * b
 
 if __name__ == "__main__":
-	NumOperations(2578, 12348)
+	NumOperations(4328394962, 37285493920)
