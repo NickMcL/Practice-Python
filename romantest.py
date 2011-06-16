@@ -132,7 +132,7 @@ class CaseCheck(unittest.TestCase):
         """toRoman should always return uppercase"""
         for integer in range (1, 4000):
             numeral = roman.toRoman(integer)
-            self.assertEqual(integer, result)
+            self.assertEqual(numeral, numeral.upper())
 
 
     def testFromRomanCase(self):
