@@ -39,7 +39,7 @@ class KnownValues(unittest.TestCase):
                     (1993, 'MCMXCIII'),
                     (2074, 'MMLXXIV'),
                     (2152, 'MMCLII'),
-                    (2212, 'MMCCXII')
+                    (2212, 'MMCCXII'),
                     (2343, 'MMCCCXLIII'),
                     (2499, 'MMCDXCIX'),
                     (2574, 'MMDLXXIV'),
@@ -90,7 +90,7 @@ class toRomanBadInput(unittest.TestCase):
         self.assertRaises(roman.OutOfRangeError, roman.toRoman, -1)
 
 
-    def testNonInteger(self)
+    def testNonInteger(self):
         """toRoman should fail with non-integer input"""
         self.assertRaises(roman.NotIntegerError, roman.toRoman, 0.5)
 
@@ -99,4 +99,50 @@ class FromRomanBadInput(unittest.TestCase):
     def testTooManyRepeatedNumerals(self):
         """fromRoman should fail with too many repeated numerals"""
         for s in ('MMMM', 'DD', 'CCCC', 'LL', 'XXXX', 'VV', 'IIII'):
-            self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, s)
+            self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman,
+                              s)
+
+
+    def testRepeatedPairs(self):
+        """fromRoman should fail with repeated pairs of numerals"""
+        for s in ('CMCM', 'CDCD', 'XCXC', 'XLXL', 'IXIX', 'IVIV'):
+            self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman,
+                              s)
+
+
+    def testMalformedAntecedent(self):
+        """fromRoman should fail with malformed antecedents"""
+        for s in ('IIMMXCC', 'VX', 'DCM', 'CMM', 'IXIV', 'MCMC', 'XCX', 'IVI',
+                  'LM', 'LD', 'LC'):
+            self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman,
+                              s)
+
+
+class SanityCheck(unittest.TestCase):
+    def testSanity(self):
+        """fromRoman(toRoman(n))==n for all n"""
+        for integer in range(1, 4000):
+            numeral = roman.toRoman(integer)
+            result = roman.fromRoman(numeral)
+            self.assertEqual(integer, result)
+
+
+class CaseCheck(unittest.TestCase):
+    def testToRomanCase(self):
+        """toRoman should always return uppercase"""
+        for integer in range (1, 4000):
+            numeral = roman.toRoman(integer)
+            self.assertEqual(integer, result)
+
+
+    def testFromRomanCase(self):
+        """fromRoman should only accept uppercase input"""
+        for integer in range(1, 4000):
+            numeral = roman.toRoman(integer)
+            roman.fromRoman(numeral.upper())
+            self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman,
+                              numeral.lower())
+
+
+if __name__ == "__main__":
+    unittest.main()
