@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 #A pracitice program based on some file reading examples in Dive into Python.
 
-=======
->>>>>>> 5385387205ba58a03e5b09d1b27cd8b3568452e2
 import os
 import sys
 from UserDict import UserDict
@@ -19,7 +16,7 @@ class FileInfo(UserDict):
 
 class MP3FileInfo(FileInfo):
 	"store ID3v1.0 MP3 tags"
-	tagDataMap = {"title"	: ( 3,   33, stripnulls),
+	tagDataMap = {"title"	: (3,   33, stripnulls),
 		      "artist"	: (33,   63, stripnulls),
 		      "album"	: (63,   93, stripnulls),
 		      "year"	: (93,   97, stripnulls),
@@ -52,7 +49,8 @@ class MP3FileInfo(FileInfo):
 def listDirectory(directory, fileExtList):
 	"get list of file info objects for files of particular extensions"
 	fileList = [os.path.normcase(f) for f in os.listdir(directory)]
-	fileList = [os.path.join(directory, f) for f in fileList if os.path.splitext(f)[1] in fileExtList]
+	fileList = [os.path.join(directory, f) for f in fileList 
+                if os.path.splitext(f)[1] in fileExtList]
 	
 	def getFileInfoClass(filename, module=sys.modules[FileInfo.__module__]):
 		"get file info class from filename extension"
