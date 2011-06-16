@@ -27,7 +27,7 @@ romanNumeralMap = (('M',  1000),
 
 def toRoman(n):
     """convert integer to Roman numeral"""
-    if not (0 < n < 4000):
+    if not (0 < n < 5000):
         raise OutOfRangeError, "number out of range (must be 1..3999)"
     if int(n) <> n:
         raise NotIntegerError, "non-integers can not be converted"
@@ -43,11 +43,13 @@ def toRoman(n):
 
 #Define pattern to detect valid Roman numerals
 romanNumeralPattern = \
-'^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$'
+'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$'
 
 
 def fromRoman(s):
     """convert Roman numeral to integer"""
+    if not s:
+        raise InvalidRomanNumeralError, 'Input can not be blank'
     if not re.search(romanNumeralPattern, s):
         raise InvalidRomanNumeralError, 'Invalid Roman numeral: %s' % s
 
