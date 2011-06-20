@@ -1,15 +1,11 @@
-<<<<<<< HEAD
-#A program that lists the callable methods in a module or function. Based off the callable and lambda exampl#es in Dive into Python.
+#A program that lists the callable methods in a module or function. Based off
+#the callable and labmda examples in Dive into Python.
 
-def info(object, spacing=10, collapse=1):
-	"""Print methods and doc strings."""
 
-=======
 def info(object, spacing=10, collapse=1):
 	"""Print methods and doc strings.
 
 	Take module, class, list, dictionary, or string."""
->>>>>>> 5385387205ba58a03e5b09d1b27cd8b3568452e2
 	methodList = [method for method in dir(object) if callable(getattr(object, method))]
 	
 	processFunc = collapse and (lambda s: " ".join(s.split())) or (lambda s: s)
